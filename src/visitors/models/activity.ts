@@ -1,5 +1,5 @@
 import { Schema, model, Document, Types } from "mongoose";
-import { UserRole } from "./user.js";
+import { UserRole } from "./user";
 
 export type ActivityType =
   | "login"

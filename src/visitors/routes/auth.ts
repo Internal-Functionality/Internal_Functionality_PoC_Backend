@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { User } from "../models/user.js";
-import { Activity } from "../models/activity.js";
+import { User } from "../models/user";
+import { Activity } from "../models/activity";
 
 export const authRouter = express.Router();
 
