@@ -5,7 +5,8 @@ const router = Router();
 
 router.post('/telemetry/ActivityReviews', ActivityController.createActivityController);
 router.get('/telemetry/ActivityReviews', ActivityController.getActivities);
+router.get('/telemetry/ActivityReviews/:id', ActivityController.getActivity);
 router.put('/telemetry/ActivityReviews', ActivityController.updateActivity);
-router.delete('/telemetry/ActivityReviews', ActivityController.deleteActivity);
+router.delete('/telemetry/ActivityReviews/:id', ActivityController.deleteActivity);
 
 export default router;
