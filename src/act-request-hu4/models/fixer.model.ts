@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-export interface Search extends Document {
+export interface Fixer extends Document {
   userName: string;
   userTypes: string;
   search: string;
@@ -10,26 +10,26 @@ export interface Search extends Document {
 
 const SearchSchema: Schema = new Schema(
   {
-    userName: {
+    name: {
       type: String,
       required: [true, 'El nombre de usuario es requerido'],
     },
-    userTypes: {
+    email: {
       type: String,
       required: true,
       default: '0',
     },
-    search: {
+    passwordHash: {
       type: String,
       required: true,
       default: '0',
     },
-    typeOfService: {
+    role: {
       type: String,
       required: true,
       default: '0',
     },
-    scope: {
+    language: {
       type: Number,
       required: true,
       default: 0,
@@ -40,5 +40,5 @@ const SearchSchema: Schema = new Schema(
   },
 );
 
-const Search = mongoose.model<Search>('search', SearchSchema);
+const Search = mongoose.model<Fixer>('user', SearchSchema);
 export default Search;
