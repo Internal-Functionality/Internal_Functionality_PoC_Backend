@@ -11,5 +11,5 @@ async function startServer() {
     console.error('Error starting server', error);
   }
 }
-//mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-IF
+
 startServer();
