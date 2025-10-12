@@ -1,9 +1,11 @@
 import Server from './config/server.config';
+import { connectDB } from './config/database.config';
 
 import { SERVER_PORT } from './config/env.config';
 
 async function startServer() {
   try {
+    await connectDB();
     Server.listen(SERVER_PORT, () => {
       console.info(`Server running on http://localhost:${SERVER_PORT}`);
     });
@@ -11,5 +13,5 @@ async function startServer() {
     console.error('Error starting server', error);
   }
 }
-//mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-IF
+
 startServer();
