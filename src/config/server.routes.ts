@@ -4,7 +4,7 @@ import search from '../act-request-hu4/routes/search.routes';
 
 const router = Router();
 
-router.use('/search', search);
+router.use('/', search);
 router.use('/api', HealthRoutes);
 
 //..
