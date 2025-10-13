@@ -1,69 +1,9 @@
-import express, { Request, Response } from "express";
-import { User } from "../models/user";
-import { Activity } from "../models/activity";
+import { Router } from "express";
+import { createOrResumeVisitor, getVisitorById } from "../controllers/visitor";
 
-export const authRouter = express.Router();
+const router = Router();
 
-authRouter.post("/visitor", async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { visitorId, language } = req.body;
+router.post("/visitor", createOrResumeVisitor);
+router.get("/visitor/:id", getVisitorById);
 
-    if (visitorId) {
-      const existing = await User.findById(visitorId);
-      if (existing && existing.role === "visitor") {
-        await Activity.create({
-          userId: existing._id,
-          role: "visitor",
-          type: "session_start",
-          metadata: { resumed: true },
-        });
-
-        res.json({
-          userId: existing._id,
-          role: existing.role,
-          name: existing.name,
-        });
-        return;
-      }
-    }
-
-    // Agregar email único temporal para que no haya conflicto con la BD
-    const uniqueEmail = `visitor_${Date.now()}_${Math.random().toString(36).substr(2, 9)}@temp.com`;
-
-    const visitor = await User.create({
-      name: `Visitor_${Date.now()}`,
-      email: uniqueEmail,
-      role: "visitor",
-      language: language || "es",
-    });
-
-    await Activity.create({
-      userId: visitor._id,
-      role: "visitor",
-      type: "session_start",
-      metadata: { resumed: false },
-    });
-
-    res.json({
-      userId: visitor._id,
-      role: visitor.role,
-      name: visitor.name,
-    });
-  } catch (error) {
-    console.error("❌ Error en /visitor:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-});
-
-authRouter.get("/visitor/:id", async (req: Request, res: Response): Promise<void> => {
-  try {
-    const visitor = await User.findById(req.params.id);
-    if (!visitor || visitor.role !== "visitor") {
-      res.status(404).json({ error: "No encontrado" });
-      return;
-    }
-    res.json(visitor);
-  } catch (error) {
-    res.status(500).json({ error: "Error interno" });
-  }
-});
+export default router;

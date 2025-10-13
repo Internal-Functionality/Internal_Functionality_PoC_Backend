@@ -42,57 +42,12 @@ router.get("/", async (_req, res) => {
 
 export { router as activityRouter };
 */
-
-import { Router } from "express";
-import { Activity } from "../models/activity"; //  Importa el modelo correcto
+import { Router } from 'express';
+import {LogActivity, getActivities} from '../controllers/activity';
 
 const router = Router();
 
-// Registrar una nueva actividad
-router.post("/", async (req, res) => {
-  try {
-    const { userId, role, type, metadata, timestamp } = req.body;
+router.post('/', LogActivity);
+router.get('/', getActivities);
 
-    // Validación
-    if (!userId || !role || !type) {
-      return res.status(400).json({ message: "Datos incompletos: userId, role y type son requeridos" });
-    }
-
-    // Usamos el modelo importado de models/activity.ts
-    const activity = new Activity({ 
-      userId, 
-      role, 
-      type, 
-      metadata: metadata || {},
-      timestamp: timestamp ? new Date(timestamp) : new Date()
-    });
-
-    await activity.save();
-
-    res.status(201).json({ 
-      message: "Actividad registrada con éxito", 
-      activity: {
-        id: activity._id,
-        userId: activity.userId,
-        type: activity.type,
-        timestamp: activity.timestamp
-      }
-    });
-  } catch (error) {
-    console.error("Error al registrar actividad:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
-  }
-});
-
-// Obtener todas las actividades
-router.get("/", async (_req, res) => {
-  try {
-    const activities = await Activity.find().sort({ timestamp: -1 });
-    res.json(activities);
-  } catch (error) {
-    console.error("Error al obtener actividades:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
-  }
-});
-
-export { router as activityRouter };
+export default router;
