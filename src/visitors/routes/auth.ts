@@ -27,8 +27,12 @@ authRouter.post("/visitor", async (req: Request, res: Response): Promise<void> =
       }
     }
 
+    // Agregar email único temporal para que no haya conflicto con la BD
+    const uniqueEmail = `visitor_${Date.now()}_${Math.random().toString(36).substr(2, 9)}@temp.com`;
+
     const visitor = await User.create({
       name: `Visitor_${Date.now()}`,
+      email: uniqueEmail,
       role: "visitor",
       language: language || "es",
     });
