@@ -3,7 +3,7 @@ import { createOrResumeVisitor, getVisitorById } from "../controllers/visitor";
 
 const router = Router();
 
-router.post("/", createOrResumeVisitor);
-router.get("/:id", getVisitorById);
+router.post("/visitor/", createOrResumeVisitor);
+router.get("/visitor/:id", getVisitorById);
 
 export default router;

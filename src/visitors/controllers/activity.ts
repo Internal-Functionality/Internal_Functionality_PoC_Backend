@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Activity } from "../models/activity";
+import { Activity } from "../../act-requesters-hu6/models/activities.model";
 
  export async function LogActivity(req: Request, res: Response) {
   try {

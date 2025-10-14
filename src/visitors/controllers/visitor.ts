@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { User } from "../models/user";
-import { Activity } from "../models/activity";
+import { User } from "../../act-requesters-hu6/models/users.model";
+import { Activity } from "../../act-requesters-hu6/models/activities.model";
 
 export async function createOrResumeVisitor (req: Request, res: Response): Promise<void> {
   try {
@@ -29,6 +29,7 @@ export async function createOrResumeVisitor (req: Request, res: Response): Promi
 
     const visitor = await User.create({
       name: `Visitor_${Date.now()}`,
+      passwordHash: '000000',
       email: uniqueEmail,
       role: "visitor",
       language: language || "es",
