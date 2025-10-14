@@ -2,10 +2,14 @@ import Server from './config/server.config';
 //
 import mongoose from 'mongoose';
 import { connectDB } from './serverData';
-import { SERVER_PORT } from './config/env.config';
+//import { SERVER_PORT } from './config/env.config';
+import { SERVER_PORT, MONGODB_URI } from './config/env.config';
 
 async function startServer() {
   try {
+    await mongoose.connect(MONGODB_URI);
+    console.log('Connected to database MongoDB Atlas!');
+
     Server.listen(SERVER_PORT, () => {
       console.info(`Server running on http://localhost:${SERVER_PORT}`);
       connectDB();

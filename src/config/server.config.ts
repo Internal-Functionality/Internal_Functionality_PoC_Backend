@@ -5,7 +5,9 @@ import AppRoutes from './server.routes';
 const app = express();
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000', // URL de tu frontend
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 );
 app.use(express.json());
