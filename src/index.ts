@@ -2,8 +2,8 @@ import Server from './config/server.config';
 //
 import mongoose from 'mongoose';
 import { connectDB } from './serverData';
-//import { SERVER_PORT } from './config/env.config';
 import { SERVER_PORT, MONGODB_URI } from './config/env.config';
+
 
 async function startServer() {
   try {

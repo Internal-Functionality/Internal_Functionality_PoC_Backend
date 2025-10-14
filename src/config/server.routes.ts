@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import HealthRoutes from '../modules/health/health.routes';
 import search from '../act-request-hu4/routes/search.routes';
-import UserRoutes4 from '../act-request-hu4/routes/user.routes';
-import JobRoutes4 from '../act-request-hu4/routes/job.route';
 import UserRoutes from '../act-requesters-hu6/routes/user.routes';
 import JobRoutes from '../act-requesters-hu6/routes/job.route';
 import ActivitRoutes from '../act-requesters-hu6/routes/activity.route';
