@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import Search from '../models/search.model';
-import Fixer from '../models/fixer.model';
 
 export async function createSearch(req: Request, res: Response): Promise<void> {
   try {
@@ -14,30 +13,6 @@ export async function createSearch(req: Request, res: Response): Promise<void> {
     res.status(500).json({
       success: false,
       error: 'Error creating search',
-    });
-  }
-}
-
-export async function createSearchAndGetFixers(req: Request, res: Response): Promise<void> {
-  try {
-    // 1. Primero crea la nueva búsqueda en la colección Search
-    const newSearch = await Search.create(req.body);
-
-    // 2. Luego obtiene todos los fixers de la colección Fixer
-    const fixers = await Fixer.find({});
-
-    res.status(201).json({
-      success: true,
-      message: 'Search created successfully and fixers retrieved',
-      search: newSearch,
-      fixers: fixers,
-      fixersCount: fixers.length,
-    });
-  } catch (error) {
-    console.log('Error in createSearchAndGetFixers: ', error);
-    res.status(500).json({
-      success: false,
-      error: 'Error creating search and retrieving fixers',
     });
   }
 }
