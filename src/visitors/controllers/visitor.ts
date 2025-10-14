@@ -11,6 +11,7 @@ export async function createOrResumeVisitor (req: Request, res: Response): Promi
       if (existing && existing.role === "visitor") {
         await Activity.create({
           userId: existing._id,
+          date: new Date(),
           role: "visitor",
           type: "session_start",
           metadata: { resumed: true },
@@ -37,6 +38,7 @@ export async function createOrResumeVisitor (req: Request, res: Response): Promi
 
     await Activity.create({
       userId: visitor._id,
+      date: new Date(),
       role: "visitor",
       type: "session_start",
       metadata: { resumed: false },

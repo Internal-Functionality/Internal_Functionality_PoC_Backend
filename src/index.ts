@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 async function startServer() {
   try {
-    await mongoose.connect("mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/Internal-Func-BD?retryWrites=true&w=majority&appName=Cluster-IF");
+    await mongoose.connect(MONGODB_URI);
     console.log('Connected to database MongoDB Atlas!');
 
     Server.listen(SERVER_PORT, () => {

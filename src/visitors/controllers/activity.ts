@@ -11,6 +11,7 @@ import { Activity } from "../../act-requesters-hu6/models/activities.model";
 
     const activity = new Activity({ 
       userId, 
+      date: timestamp ? new Date(timestamp) : new Date(),
       role, 
       type, 
       metadata: metadata || {},
