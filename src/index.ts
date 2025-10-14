@@ -1,4 +1,6 @@
 import Server from './config/server.config';
+//
+import mongoose from 'mongoose';
 import { connectDB } from './serverData';
 import { SERVER_PORT } from './config/env.config';
 
