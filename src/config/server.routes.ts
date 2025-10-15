@@ -16,6 +16,8 @@ router.use("/api", authRouter);
 router.use("/api", activityRouter);
 router.use('/api', UserRoutes);
 router.use('/api', JobRoutes);
+router.use('/', UserRoutes);
+router.use('/', JobRoutes);
 router.use('/api', ActivitRoutes);
 router.use('/api', ActivityRoutes);
 

@@ -1,7 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { Booking, bookingCollection } from '../fixer-activity/models/activity';
 
-const uri = 'mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-IF';
+const uri = 'mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/Internal-Func-BD?retryWrites=true&w=majority&appName=Cluster-IF';
 
 const client = new MongoClient(uri);
 
