@@ -7,7 +7,7 @@ import { SERVER_PORT, MONGODB_URI } from './config/env.config';
 
 async function startServer() {
   try {
-    await mongoose.connect(MONGODB_URI);
+    await mongoose.connect('mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-IF');
     console.log('Connected to database MongoDB Atlas!');
 
     Server.listen(SERVER_PORT, () => {

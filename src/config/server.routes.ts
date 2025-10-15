@@ -11,8 +11,6 @@ import ActivityRoutes from '../fixer-activity/routes/activity.routes';
 const router = Router();
 
 router.use('/', search);
-router.use('/', UserRoutes4);
-router.use('/', JobRoutes4);
 router.use('/api', HealthRoutes);
 router.use("/api", authRouter);
 router.use("/api", activityRouter);
