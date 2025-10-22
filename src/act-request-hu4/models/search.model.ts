@@ -6,6 +6,8 @@ export interface Search extends Document {
   search: string;
   typeOfService: string;
   scope: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const SearchSchema: Schema = new Schema(
@@ -36,9 +38,36 @@ const SearchSchema: Schema = new Schema(
     },
   },
   {
-    timestamps: true, //crear y modificar ? preguntar
+    timestamps: true,
   },
 );
+
+// Método para personalizar la representación JSON - Fechas en hora de Bolivia (24 horas)
+SearchSchema.methods.toJSON = function () {
+  const search = this.toObject();
+
+  // Opciones para formato de 24 horas
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: 'America/La_Paz',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false, // Esto fuerza el formato de 24 horas
+  };
+
+  if (search.createdAt) {
+    search.createdAt = new Date(search.createdAt).toLocaleString('es-BO', options);
+  }
+
+  if (search.updatedAt) {
+    search.updatedAt = new Date(search.updatedAt).toLocaleString('es-BO', options);
+  }
+
+  return search;
+};
 
 const Search = mongoose.model<Search>('search', SearchSchema);
 export default Search;
