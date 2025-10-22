@@ -1,9 +1,22 @@
 import { Request, Response } from 'express';
 import { Activity } from '../models/activities.model';
 
+// Función para obtener fecha ajustada a zona horaria
+function getAdjustedDate(date?: Date): Date {
+  const now = date || new Date();
+  const offset = -4; // Bolivia UTC-4
+  return new Date(now.getTime() + offset * 60 * 60 * 1000);
+}
+
 export async function createActivityController(req: Request, res: Response) {
   try {
-    const activity = await Activity.create(req.body);
+    const activityData = {
+      ...req.body,
+      timestamp: getAdjustedDate(),
+      date: req.body.date ? getAdjustedDate(new Date(req.body.date)) : getAdjustedDate()
+    };
+    
+    const activity = await Activity.create(activityData);
     res.status(200).json(activity);
   } catch (error) {
     console.log('Error to create Activity:', error);
@@ -35,7 +48,12 @@ export async function getActivity(req: Request, res: Response){
 export async function updateActivity(req: Request, res: Response){
   try {
     const { id } = req.params;
-    const activity = await Activity.findByIdAndUpdate(id, req.body);
+    const updateData = {
+      ...req.body,
+      timestamp: getAdjustedDate()
+    };
+    
+    const activity = await Activity.findByIdAndUpdate(id, updateData);
     if (!activity) {
       return res.status(404).json({ message: "Activity not found" });
     }

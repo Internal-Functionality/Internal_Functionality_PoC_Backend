@@ -57,7 +57,7 @@ const ActivitySchema: Schema = new Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: false
   }
 );
 
