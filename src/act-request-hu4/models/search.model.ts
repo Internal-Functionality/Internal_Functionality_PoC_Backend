@@ -6,6 +6,7 @@ export interface Search extends Document {
   search: string;
   typeOfService: string;
   scope: number;
+  searchesFound: number;  
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,6 +33,11 @@ const SearchSchema: Schema = new Schema(
       default: '0',
     },
     scope: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    searchFound: {
       type: Number,
       required: true,
       default: 0,
