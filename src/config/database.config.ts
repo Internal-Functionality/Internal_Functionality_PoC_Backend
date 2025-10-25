@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { Booking, bookingCollection } from '../fixer-activity/models/activity';
+import { bookingCollection } from '../fixer-activity/models/activity';
 
 const uri = 'mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/Internal-Func-BD?retryWrites=true&w=majority&appName=Cluster-IF';
 
@@ -21,7 +21,7 @@ export const getDB = () => {
 
 const seedDatabase = async () => {
   const db = getDB();
-  const collection = db.collection<Booking>(bookingCollection);
+  const collection = db.collection(bookingCollection);
 
   const count = await collection.countDocuments();
   if (count === 0) {
