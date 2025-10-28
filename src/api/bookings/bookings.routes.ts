@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as ActivityController from '../controllers/activity.controller';
+import * as ActivityController from './bookings.controller';
 
 const router = Router();
 

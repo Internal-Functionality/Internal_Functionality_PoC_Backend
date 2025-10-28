@@ -31,7 +31,7 @@ cp .env.example .env
 ```
 
 ```env
-SERVER_PORT=3000
+SERVER_PORT=3001
 ```
 
 3. Start the dev server
@@ -43,7 +43,7 @@ npm run dev
 You should see:
 
 ```text
-Server running on http://localhost:3000
+Server running on http://localhost:3001
 ```
 
 ## API
@@ -66,7 +66,7 @@ Base URL: `http://localhost:<SERVER_PORT>/api`
 Quick test:
 
 ```bash
-curl -i http://localhost:3000/api/healthy
+curl -i http://localhost:3001/api/healthy
 ```
 
 ## Project Structure

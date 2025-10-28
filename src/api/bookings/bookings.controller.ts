@@ -1,9 +1,7 @@
-//ruta: src/fixer-activity/controllers/activity.controller.ts
+//ruta: src/api/bookings/bookings.controller.ts
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { getDB } from '../../config/database.config';
-import { Booking, bookingCollection, IBooking } from '../models/activity';
-import { start } from 'repl';
+import { Booking, bookingCollection, IBooking } from './bookings.model';
 
 export const getFixerActivity = async (req: Request, res: Response) => {
   try {
@@ -11,17 +9,17 @@ export const getFixerActivity = async (req: Request, res: Response) => {
       .populate({
         path: 'requesterId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'fixerId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'jobId',
         select: 'title',
-        model: 'Job'
+        model: 'Job',
       })
       .exec();
 
@@ -43,22 +41,22 @@ export const acceptBooking = async (req: Request, res: Response) => {
     const updatedBooking = await Booking.findByIdAndUpdate(
       id,
       { status: 'confirmed' },
-      { new: true }
+      { new: true },
     )
       .populate({
         path: 'requesterId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'fixerId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'jobId',
         select: 'title',
-        model: 'Job'
+        model: 'Job',
       })
       .exec();
 
@@ -79,22 +77,22 @@ export const cancelBooking = async (req: Request, res: Response) => {
     const updatedBooking = await Booking.findByIdAndUpdate(
       id,
       { status: 'cancelled' },
-      { new: true }
+      { new: true },
     )
       .populate({
         path: 'requesterId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'fixerId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'jobId',
         select: 'title',
-        model: 'Job'
+        model: 'Job',
       })
       .exec();
 
@@ -138,17 +136,17 @@ export const getBookingsByDateRange = async (req: Request, res: Response) => {
       .populate({
         path: 'requesterId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'fixerId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'jobId',
         select: 'title',
-        model: 'Job'
+        model: 'Job',
       })
       .sort({ date: 1 })
       .exec();
@@ -166,17 +164,17 @@ export const getAcceptedBookings = async (req: Request, res: Response) => {
       .populate({
         path: 'requesterId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'fixerId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'jobId',
         select: 'title',
-        model: 'Job'
+        model: 'Job',
       })
       .sort({ date: 1 })
       .exec();
@@ -194,17 +192,17 @@ export const getCancelledBookings = async (req: Request, res: Response) => {
       .populate({
         path: 'requesterId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'fixerId',
         select: 'name',
-        model: 'User'
+        model: 'User',
       })
       .populate({
         path: 'jobId',
         select: 'title',
-        model: 'Job'
+        model: 'Job',
       })
       .sort({ date: 1 })
       .exec();

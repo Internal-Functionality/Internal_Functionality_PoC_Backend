@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { MONGODB_URI } from './config/env.config';
 
 dotenv.config();
 
-const MONGODB_URI = 'mongodb+srv://admin:admin123@cluster-if.mamcwj7.mongodb.net/Internal-Func-BD?retryWrites=true&w=majority&appName=Cluster-IF';
 export const connectDB = async (): Promise<void> => {
   try {
-    await mongoose.connect(MONGODB_URI, {});
-    console.log('MongoDB connected successfully');
+    await mongoose.connect(MONGODB_URI || '', {});
+    console.log('MongoDB connected successfully via Mongoose');
   } catch (error) {
     console.error('MongoDB connection error:', error);
     process.exit(1);

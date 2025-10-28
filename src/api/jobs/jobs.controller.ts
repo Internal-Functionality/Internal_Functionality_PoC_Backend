@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Job } from '../models/jobs.model';
+import { Job } from './jobs.model';
 
 export async function createJobController(req: Request, res: Response) {
   try {
@@ -11,8 +11,8 @@ export async function createJobController(req: Request, res: Response) {
   }
 }
 
-export async function getJobs(req: Request, res: Response){
-    try {
+export async function getJobs(req: Request, res: Response) {
+  try {
     const jobs = await Job.find({});
     res.status(200).json(jobs);
   } catch (error) {
@@ -21,7 +21,7 @@ export async function getJobs(req: Request, res: Response){
   }
 }
 
-export async function getJob(req: Request, res: Response){
+export async function getJob(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const job = await Job.findById(id);
@@ -32,12 +32,12 @@ export async function getJob(req: Request, res: Response){
   }
 }
 
-export async function updateJob(req: Request, res: Response){
+export async function updateJob(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const job = await Job.findByIdAndUpdate(id, req.body);
     if (!job) {
-      return res.status(404).json({ message: "Job not found" });
+      return res.status(404).json({ message: 'Job not found' });
     }
     const updatedJob = await Job.findById(id);
     res.status(200).json(updatedJob);
@@ -47,14 +47,14 @@ export async function updateJob(req: Request, res: Response){
   }
 }
 
-export async function deleteJob(req: Request, res: Response){
+export async function deleteJob(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const job = await Job.findByIdAndDelete(id);
     if (!job) {
-      return res.status(404).json({ message: "Job not found" });
+      return res.status(404).json({ message: 'Job not found' });
     }
-    res.status(200).json({ message: "Job deleted" });
+    res.status(200).json({ message: 'Job deleted' });
   } catch (error) {
     console.log('Error to delete Job:', error);
     res.status(500).json({ error: 'Error deleting Job' });

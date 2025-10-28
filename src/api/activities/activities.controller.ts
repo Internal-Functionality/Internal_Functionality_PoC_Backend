@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { Activity } from '../models/activities.model';
+import { Activity } from './activities.model';
 
 function getAdjustedDate(date?: Date): Date {
   const now = date || new Date();
