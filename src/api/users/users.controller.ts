@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from '../models/users.model';
+import { User } from './users.model';
 
 export async function createUserController(req: Request, res: Response) {
   try {
@@ -11,8 +11,8 @@ export async function createUserController(req: Request, res: Response) {
   }
 }
 
-export async function getUsers(req: Request, res: Response){
-    try {
+export async function getUsers(req: Request, res: Response) {
+  try {
     const users = await User.find({});
     res.status(200).json(users);
   } catch (error) {
@@ -21,7 +21,7 @@ export async function getUsers(req: Request, res: Response){
   }
 }
 
-export async function getUser(req: Request, res: Response){
+export async function getUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -32,12 +32,12 @@ export async function getUser(req: Request, res: Response){
   }
 }
 
-export async function updateUser(req: Request, res: Response){
+export async function updateUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const user = await User.findByIdAndUpdate(id, req.body);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: 'User not found' });
     }
     const updatedUser = await User.findById(id);
     res.status(200).json(updatedUser);
@@ -47,14 +47,14 @@ export async function updateUser(req: Request, res: Response){
   }
 }
 
-export async function deleteUser(req: Request, res: Response){
+export async function deleteUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.status(200).json({ message: "User deleted" });
+    res.status(200).json({ message: 'User deleted' });
   } catch (error) {
     console.log('Error to delete user:', error);
     res.status(500).json({ error: 'Error deleting user' });

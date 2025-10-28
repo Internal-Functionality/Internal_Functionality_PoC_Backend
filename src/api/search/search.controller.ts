@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Search from '../models/search.model';
+import Search from './search.model';
 
 export async function createSearch(req: Request, res: Response): Promise<void> {
   try {
